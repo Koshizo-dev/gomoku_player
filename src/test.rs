@@ -122,6 +122,74 @@ impl Test {
         self.start_tests("col", tests);
     }
 
+    fn diag1_tests(&mut self, cell: Cell) {
+        let tests = vec![
+            TestCondition::new(
+                vec![
+                    ((2, 3).into(), cell),
+                    ((3, 4).into(), cell),
+                    ((4, 5).into(), cell),
+                    ((6, 7).into(), cell),
+                ],
+                vec![(5, 6).into()],
+            ),
+            TestCondition::new(
+                vec![
+                    ((2, 3).into(), cell),
+                    ((4, 5).into(), cell),
+                    ((5, 6).into(), cell),
+                    ((6, 7).into(), cell),
+                ],
+                vec![(3, 4).into()],
+            ),
+            TestCondition::new(
+                vec![
+                    ((2, 3).into(), cell),
+                    ((3, 4).into(), cell),
+                    ((5, 6).into(), cell),
+                    ((6, 7).into(), cell),
+                ],
+                vec![(4, 5).into()],
+            ),
+        ];
+
+        self.start_tests("diag1", tests);
+    }
+
+    fn diag2_tests(&mut self, cell: Cell) {
+        let tests = vec![
+            TestCondition::new(
+                vec![
+                    ((2, 7).into(), cell),
+                    ((3, 6).into(), cell),
+                    ((4, 5).into(), cell),
+                    ((6, 3).into(), cell),
+                ],
+                vec![(5, 4).into()],
+            ),
+            TestCondition::new(
+                vec![
+                    ((2, 7).into(), cell),
+                    ((4, 5).into(), cell),
+                    ((5, 4).into(), cell),
+                    ((6, 3).into(), cell),
+                ],
+                vec![(3, 6).into()],
+            ),
+            TestCondition::new(
+                vec![
+                    ((2, 7).into(), cell),
+                    ((3, 6).into(), cell),
+                    ((5, 4).into(), cell),
+                    ((6, 3).into(), cell),
+                ],
+                vec![(4, 5).into()],
+            ),
+        ];
+
+        self.start_tests("diag2", tests);
+    }
+
     fn col_tests(&mut self, cell: Cell) {
         let tests = vec![
             TestCondition::new(
@@ -158,11 +226,17 @@ impl Test {
 
     /// Tests will be ran on `ai1`
     pub fn run(&mut self) {
-        // check defense
-        self.col_tests(Cell::Ai2);
-        self.row_tests(Cell::Ai2);
-
-        // check attack
+        let cells = vec![Cell::Ai1, Cell::Ai2];
+        for cell in cells {
+            match cell {
+                Cell::Ai1 => println!("ATTACKING TEST MODE!"),
+                _ => println!("DEFENDING TEST MODE!"),
+            }
+            self.col_tests(cell);
+            self.row_tests(cell);
+            self.diag1_tests(cell);
+            self.diag2_tests(cell);
+        }
 
         // After every tests we can stop the Ai
         self.ai.stop();
