@@ -59,18 +59,24 @@ impl Board {
     }
 
     pub fn place(&mut self, x: usize, y: usize, cell: Cell) {
-        if self.board[y][x] != Cell::Empty {
+        if self.board[y - 1][x - 1] != Cell::Empty {
             println!(
                 "ILLEGAL MOVE AT (x,y): ({},{}): ({})",
-                x, y, self.board[y][x]
+                x,
+                y,
+                self.board[y - 1][x - 1]
             );
             println!(
                 "ILLEGAL MOVE AT (x,y): ({},{}): ({})",
-                x, y, self.board[y][x]
+                x,
+                y,
+                self.board[y - 1][x - 1]
             );
             println!(
                 "ILLEGAL MOVE AT (x,y): ({},{}): ({})",
-                x, y, self.board[y][x]
+                x,
+                y,
+                self.board[y - 1][x - 1]
             );
         }
         self.board[y - 1][x - 1] = cell;

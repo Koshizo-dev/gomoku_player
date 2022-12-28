@@ -1,4 +1,4 @@
-use crate::Runtime;
+use crate::runtime::Runtime;
 
 pub struct Ai {
     pub runtime: Runtime,
@@ -7,6 +7,12 @@ pub struct Ai {
 impl Ai {
     pub fn new(runtime: Runtime) -> Self {
         Self { runtime }
+    }
+
+    pub fn from_path(path: &str) -> Result<Ai, String> {
+        let runtime = Runtime::init(path)?;
+
+        Ok(Ai::new(runtime))
     }
 
     pub fn reset(&mut self, board_size: usize) {

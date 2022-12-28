@@ -1,9 +1,6 @@
-mod ai;
-mod board;
-mod game;
-mod runtime;
-
-pub use ai::*;
-pub use board::*;
-pub use game::*;
-pub use runtime::*;
+pub mod ai;
+pub mod board;
+pub mod game;
+pub mod location;
+pub mod runtime;
+pub mod test;
