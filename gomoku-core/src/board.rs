@@ -1,6 +1,6 @@
 use std::fmt::{Display, Formatter, Result};
 
-#[derive(Clone, Copy, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub enum Cell {
     Empty,
     Ai1,
@@ -40,10 +40,10 @@ impl Display for Cell {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct Board {
-    board: Vec<Vec<Cell>>,
-    size: usize,
+    pub board: Vec<Vec<Cell>>,
+    pub size: usize,
 }
 
 impl Board {
@@ -62,21 +62,15 @@ impl Board {
         if self.board[y][x] != Cell::Empty {
             println!(
                 "ILLEGAL MOVE AT (x,y): ({},{}): ({})",
-                x,
-                y,
-                self.board[y][x]
+                x, y, self.board[y][x]
             );
             println!(
                 "ILLEGAL MOVE AT (x,y): ({},{}): ({})",
-                x,
-                y,
-                self.board[y][x]
+                x, y, self.board[y][x]
             );
             println!(
                 "ILLEGAL MOVE AT (x,y): ({},{}): ({})",
-                x,
-                y,
-                self.board[y][x]
+                x, y, self.board[y][x]
             );
         }
         self.board[y][x] = cell;
