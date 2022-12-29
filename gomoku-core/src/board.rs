@@ -59,27 +59,27 @@ impl Board {
     }
 
     pub fn place(&mut self, x: usize, y: usize, cell: Cell) {
-        if self.board[y - 1][x - 1] != Cell::Empty {
+        if self.board[y][x] != Cell::Empty {
             println!(
                 "ILLEGAL MOVE AT (x,y): ({},{}): ({})",
                 x,
                 y,
-                self.board[y - 1][x - 1]
+                self.board[y][x]
             );
             println!(
                 "ILLEGAL MOVE AT (x,y): ({},{}): ({})",
                 x,
                 y,
-                self.board[y - 1][x - 1]
+                self.board[y][x]
             );
             println!(
                 "ILLEGAL MOVE AT (x,y): ({},{}): ({})",
                 x,
                 y,
-                self.board[y - 1][x - 1]
+                self.board[y][x]
             );
         }
-        self.board[y - 1][x - 1] = cell;
+        self.board[y][x] = cell;
     }
 
     pub fn display(&self) {
@@ -88,7 +88,7 @@ impl Board {
 
         // Print column indices
         print!("\t");
-        for i in 1..self.size + 1 {
+        for i in 0..self.size {
             let spaces = " ".repeat(max_digits - i.to_string().len() + 1);
             print!("{}{}", i, spaces);
         }

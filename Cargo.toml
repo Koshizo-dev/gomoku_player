@@ -1,8 +1,35 @@
 [package]
 name = "gomoku_player"
 version = "0.1.0"
+authors = ["Paul COMTE <paul.codepro@gmail.com>"]
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+default-run = "gomoku_player"
 
 [dependencies]
+gomoku-core = { path = "./gomoku-core" }
+
+[[bin]]
+name = "gomoku_player"
+path = "gomoku-core/src/bin/gomoku.rs"
+
+[workspace]
+members = ["gomoku-core", "gomoku-ui"]
+
+[profile.release-lto]
+inherits = "release"
+lto = true
+codegen-units = 1
+
+# A profile which compiles all (non-workspace) dependencies in release mode
+# but Lapce code in dev mode. This gives a good debugging experience for your
+# code and fast performance of other people's code. After the initial
+# build subsequent ones are as fast as dev mode builds.
+# See https://doc.rust-lang.org/cargo/reference/profiles.html
+# To use this profile:
+#   cargo build --profile fastdev
+#   cargo run --profile fastdev --bin lapce
+[profile.fastdev.package."*"]
+opt-level = 3
+
+[profile.fastdev]
+inherits = "dev"

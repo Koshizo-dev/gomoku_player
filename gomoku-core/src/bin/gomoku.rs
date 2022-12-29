@@ -1,6 +1,6 @@
 use std::env;
 
-use gomoku_player::{
+use gomoku_core::{
     game::{Game, GameSettings},
     test::Test,
 };
