@@ -1,12 +1,11 @@
 use std::env;
 
-use gomoku_core::{
-    game::{Game, GameSettings},
-    test::Test,
-};
+use gomoku_ui::Gomoku;
+
+use gomoku_core::test::Test;
 
 enum StartMode {
-    Fight(String, String),
+    Fight,
     Test(String),
     Unknown,
     Incorrect,
@@ -20,14 +19,15 @@ impl StartMode {
                 panic!("Unknown mode");
             }
             Self::Incorrect => {}
-            Self::Fight(ai1_path, ai2_path) => {
+            Self::Fight => {
                 println!("Running in fight mode!");
-                Game::init(ai1_path, ai2_path)
-                    .expect("")
-                    .run(&GameSettings {
-                        board_size: 20,
-                        ai1_starting: true,
-                    });
+                Gomoku::run();
+                //Game::init(ai1_path, ai2_path)
+                //    .expect("")
+                //    .run(&GameSettings {
+                //        board_size: 20,
+                //        ai1_starting: true,
+                //    });
             }
             Self::Test(ai_path) => {
                 println!("Running in test mode!");
@@ -47,7 +47,7 @@ fn show_help() {
         "",
         "Commands:",
         "\t--test <AI_PATH>\t\tRun functionnal tests for <AI_PATH>",
-        "\t--fight <AI1_PATH> <AI2_PATH>\t\tRun a fight between <AI1_PATH> and <AI2_PATH>",
+        "\t--fight\t\tRun the fight ui",
     ];
 
     for message in messages {
@@ -67,14 +67,7 @@ fn check_args(args: Vec<String>) -> StartMode {
 
             StartMode::Test(args[1].clone())
         }
-        "--fight" => {
-            if args.len() != 3 {
-                println!("<AI_PATH> missing!");
-                return StartMode::Incorrect;
-            }
-
-            StartMode::Fight(args[1].clone(), args[2].clone())
-        }
+        "--fight" => StartMode::Fight,
         _ => StartMode::Unknown,
     }
 }

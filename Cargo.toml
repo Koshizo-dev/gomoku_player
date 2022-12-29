@@ -7,13 +7,15 @@ default-run = "gomoku_player"
 
 [dependencies]
 gomoku-core = { path = "./gomoku-core" }
+gomoku-ui = { path = "./gomoku-ui" }
+gomoku-runner = { path = "./gomoku-runner" }
 
 [[bin]]
 name = "gomoku_player"
-path = "gomoku-core/src/bin/gomoku.rs"
+path = "gomoku-runner/src/gomoku.rs"
 
 [workspace]
-members = ["gomoku-core", "gomoku-ui"]
+members = ["gomoku-core", "gomoku-ui", "gomoku-runner"]
 
 [profile.release-lto]
 inherits = "release"

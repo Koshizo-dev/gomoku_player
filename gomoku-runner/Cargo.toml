@@ -1,10 +1,10 @@
 [package]
-name = "gomoku-ui"
+name = "gomoku-runner"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-gomoku-core = { path = "../gomoku-core" }
-iced = "0.6"
+gomoku-core = { "path" = "../gomoku-core" }
+gomoku-ui = { "path" = "../gomoku-ui" }
