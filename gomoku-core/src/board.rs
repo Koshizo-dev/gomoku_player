@@ -97,7 +97,7 @@ impl Board {
         // Print rows
         for (i, row) in self.board.iter().enumerate() {
             let spaces = " ".repeat(max_digits - i.to_string().len());
-            print!("{}{}\t", i + 1, spaces);
+            print!("{}{}\t", i, spaces);
             for cell in row.iter() {
                 let spaces = " ".repeat(max_digits - cell.to_string().len() + 1);
                 print!("{}{}", cell, spaces);
